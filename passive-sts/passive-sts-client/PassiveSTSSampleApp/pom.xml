@@ -4,21 +4,13 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>PassiveSTSSample</artifactId>
-        <version>4.3.6-SNAPSHOT</version>
+        <version>4.4.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>PassiveSTSSampleApp</artifactId>
     <packaging>war</packaging>
-    
-    <repositories>
-        <repository>
-            <id>wso2-nexus</id>
-            <name>WSO2 internal Repository</name>
-            <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

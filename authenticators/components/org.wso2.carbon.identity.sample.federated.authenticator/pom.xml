@@ -16,44 +16,51 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
+    <parent>
+        <groupId>org.wso2.samples.is</groupId>
+        <artifactId>wso2is-identity-samples-authenticators</artifactId>
+        <version>4.4.2-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
-    <groupId>custom-federated-authenticator</groupId>
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.carbon.identity.custom.federated.authenticator</artifactId>
-    <version>1.0.0</version>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon - Custom Federated Authenticator</name>
-    <modelVersion>4.0.0</modelVersion>
+    <url>http://wso2.org</url>
 
     <dependencies>
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.core</artifactId>
-            <version>${carbon.identity.framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
-            <version>${carbon.identity.framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.orbit.org.apache.oltu.oauth2</groupId>
             <artifactId>oltu</artifactId>
-            <version>${oltu.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.application.common</artifactId>
-            <version>${carbon.identity.framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.orbit.com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>${nimbusds.version}</version>
         </dependency>
         <dependency>
             <groupId>net.minidev</groupId>
             <artifactId>json-smart</artifactId>
-            <version>${json-smart.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec.wso2</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -92,8 +99,12 @@
                         </Private-Package>
                         <Export-Package>
                             !org.wso2.carbon.identity.custom.federated.authenticator.internal,
-                            org.wso2.carbon.identity.custom.federated.authenticator.*; version="1.0.0"
+                            org.wso2.carbon.identity.custom.federated.authenticator.*; version=${project.version}
                         </Export-Package>
+                        <Import-Package>
+                            com.nimbusds.jose.util;version="${nimbusds.osgi.version.range}",
+                            net.minidev.json;version="${json-smart.version.range}"
+                        </Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
@@ -101,31 +112,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>wso2-nexus</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>wso2-maven2-repository</id>
-            <url>http://dist.wso2.org/maven2</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <properties>
-        <carbon.identity.framework.version>5.18.21</carbon.identity.framework.version>
-        <oltu.version>1.0.0.wso2v3</oltu.version>
-        <json-smart.version>2.3</json-smart.version>
-        <nimbusds.version>7.3.0.wso2v1</nimbusds.version>
-
-    </properties>
 </project>
